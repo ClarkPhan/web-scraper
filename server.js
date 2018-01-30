@@ -33,9 +33,18 @@ app.get("/", function(req, res) {
 // from the scrapedData collection as a json (this will be populated
 // by the data you scrape using the next route)
 app.get("/scrape", function(req,res) {
-  
+  // Drop collection before inserting data
+  db.scrapedData.drop(function(err, data){
+    if (err) throw err;
+  })
   scrapper.scrape().then((data) => {
     console.log(data); // Success!
+    for(var i = 0; i < data.length; i++){
+      db.scrapedData.insert({
+        game: data[i].game,
+        viewers: data[i].viewers
+      })
+    }
   });
   res.send("Done Scrape");    
 })
