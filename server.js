@@ -27,11 +27,7 @@ app.get("/", function(req, res) {
   res.send("Hello world");
 });
 
-// Route 1
-// =======
-// This route will retrieve all of the data
-// from the scrapedData collection as a json (this will be populated
-// by the data you scrape using the next route)
+// Scrape route (scrapes data and sends back res)
 app.get("/scrape", function(req,res) {
   // Drop collection before inserting data
   db.scrapedData.drop(function(err, data){
@@ -48,16 +44,8 @@ app.get("/scrape", function(req,res) {
   });
   res.send("Done Scrape");    
 })
-// Route 2
-// =======
-// When you visit this route, the server will
-// scrape data from the site of your choice, and save it to
-// MongoDB.
-// TIP: Think back to how you pushed website data
-// into an empty array in the last class. How do you
-// push it into a MongoDB collection instead?
 
-/* -/-/-/-/-/-/-/-/-/-/-/-/- */
+// all route (displays all scraped data)
 app.get('/all',function(req, res) {
   db.scrapedData.find(function(err,data) {
     if (err) throw err;
