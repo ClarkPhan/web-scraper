@@ -16,6 +16,11 @@ var app = express();
 var databaseUrl = "twitchData";
 var collections = ["scrapedData"];
 
+// Handlebars
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
@@ -24,7 +29,14 @@ db.on("error", function(error) {
 
 // Main route (simple Hello World Message)
 app.get("/", function(req, res) {
-  res.send("Hello world");
+  db.scrapedData.find(function(err, data) {
+    if (err) throw err;
+    var hbsObject = {
+       data: data
+    };
+    console.log(data);
+    res.render("index", hbsObject);
+  });
 });
 
 // Scrape route (scrapes data and sends back res)
@@ -38,7 +50,8 @@ app.get("/scrape", function(req,res) {
     for(var i = 0; i < data.length; i++){
       db.scrapedData.insert({
         game: data[i].game,
-        viewers: data[i].viewers
+        viewers: data[i].viewers,
+        imageSrc: data[i].img
       })
     }
   });

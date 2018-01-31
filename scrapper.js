@@ -25,10 +25,6 @@ async function scrape() {
   return result;
 };
 
-scrape().then(function(result){
-  console.log(result);
-})
-
 module.exports = {
   scrape: scrape
 } 

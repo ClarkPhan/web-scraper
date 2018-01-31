@@ -1,0 +1,14 @@
+<div>
+  <div class="container">
+    <div class="row">
+      {{#each data}}
+      <div class="col">
+        <img src={{this.imageSrc}}>
+        <h3>{{this.game}}</h1>
+        <p>
+          <span>Viewers:</span> {{this.viewers}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
