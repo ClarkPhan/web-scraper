@@ -55,6 +55,8 @@ app.get("/scrape", function(req,res) {
   scrapper.scrape().then((data) => {
     console.log(data); // Success!
     var dt = new Date();
+    // Convert time to PST
+    dt.setUTCHours(dt.getUTCHours() - 8);
     for(var i = 0; i < data.length; i++){
       db.scrapedData.insert({
         game: data[i].game,
