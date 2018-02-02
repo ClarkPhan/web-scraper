@@ -1,4 +1,5 @@
 // Dependencies
+var logger = require("morgan");
 var express = require("express");
 var mongojs = require("mongojs");
 
@@ -12,6 +13,9 @@ var scrapper = require('./scrapper.js');
 // Initialize Express
 var app = express();
 
+// Use morgan logger for logging requests
+app.use(logger("dev"));
+
 // Database configuration
 var databaseUrl = "twitchData";
 var collections = ["scrapedData"];
@@ -20,6 +24,9 @@ var collections = ["scrapedData"];
 var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
