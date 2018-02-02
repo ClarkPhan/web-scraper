@@ -9,7 +9,7 @@ $(function () {
       console.log(data);
       setTimeout(function(){
         location.reload();
-      },8000)
+      },15000)
     })
   })
 });
