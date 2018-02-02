@@ -1,8 +1,9 @@
 <div>
   <div class="container">
+    <p> <a href="https://github.com/ClarkPhan/web-scraper" target="_blank">GitHub Repo</a></p>
     <div class="jumbotron text-center">
       <h1>Twitch.tv Web Scraper!</h1>
-      <h3>Periodically updates page for most watched games on Twitch.tv</h3>
+      <h3>Periodically updates for most watched games on Twitch.tv</h3>
       <button class="btn btn-primary btn-lg" id="update">Update!</button>
       {{#each data}}
         {{#if @last}}
@@ -15,8 +16,7 @@
       <div class="col-md-4">
         <img src={{this.imageSrc}}>
         <h3>{{this.game}}</h1>
-          <p>
-            <span>Viewers:</span> {{this.viewers}}</p>
+          <p><span>Viewers:</span> {{this.viewers}}</p>
       </div>
       {{/each}}
     </div>
