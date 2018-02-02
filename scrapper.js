@@ -1,12 +1,15 @@
 const puppeteer = require('puppeteer');
 
 async function scrape() {
+  // Launch browser, open new page, and goes to twitch
   const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
   await page.setViewport({width: 1000, height: 1000})
   await page.goto('http://twitch.tv/');
-  await page.waitFor(1000);
 
+  await page.waitFor(1000);
+  
+  // After waiting for a second for html elements to be dynamically generated, get result
   const result = await page.evaluate(() => {
     let data = []; // Create an empty array that will store our data
     let elements = document.querySelectorAll('div.tw-mg-t-05'); // Select all Games
