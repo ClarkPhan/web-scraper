@@ -17,7 +17,7 @@ var app = express();
 app.use(logger("dev"));
 
 // Database configuration
-var databaseUrl = "twitchData";
+var databaseUrl = process.env.MONGODB_URI || "localhost:27017/twitchData";
 var collections = ["scrapedData"];
 
 // Handlebars
