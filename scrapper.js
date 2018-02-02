@@ -2,7 +2,9 @@ const puppeteer = require('puppeteer');
 
 async function scrape() {
   // Launch browser, open new page, and goes to twitch
-  const browser = await puppeteer.launch({headless: true});
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    
   const page = await browser.newPage();
 
   await page.goto('http://twitch.tv/');
