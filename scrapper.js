@@ -6,7 +6,7 @@ async function scrape() {
   const page = await browser.newPage();
 
   await page.goto('http://twitch.tv/');
-
+  await page.waitFor(1000);
   // After waiting for a second for html elements to be dynamically generated, get result
   const result = await page.evaluate(() => {
     let data = []; // Create an empty array that will store our data
