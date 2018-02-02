@@ -34,7 +34,7 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
-// Main route (simple Hello World Message)
+// Main route
 app.get("/", function(req, res) {
   db.scrapedData.find(function(err, data) {
     if (err) throw err;
@@ -48,8 +48,8 @@ app.get("/", function(req, res) {
 
 // Scrape route (scrapes data and sends back res)
 app.get("/scrape", function(req,res) {
-  // Drop collection before inserting data
-  db.scrapedData.drop(function(err, data){
+  // Cleans collection before inserting data
+  db.scrapedData.remove(function(err, data){
     if (err) throw err;
   })
   scrapper.scrape().then((data) => {
