@@ -4,7 +4,11 @@
       <h1>Twitch.tv Web Scraper!</h1>
       <h3>Periodically updates page for most watched games on Twitch.tv</h3>
       <button class="btn btn-primary btn-lg" id="update">Update!</button>
-      <p>Last updated:<span id="update_time"></span></p>
+      {{#each data}}
+        {{#if @last}}
+          <p>Last updated: <span>{{this.date_created}}</span></p>
+        {{/if}}
+      {{/each}}
     </div>
     <div class="row">
       {{#each data}}

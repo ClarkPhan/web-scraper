@@ -54,11 +54,13 @@ app.get("/scrape", function(req,res) {
   })
   scrapper.scrape().then((data) => {
     console.log(data); // Success!
+    var dt = new Date();
     for(var i = 0; i < data.length; i++){
       db.scrapedData.insert({
         game: data[i].game,
         viewers: data[i].viewers,
-        imageSrc: data[i].img
+        imageSrc: data[i].img,
+        date_created: dt.toUTCString()
       })
     }
   });
